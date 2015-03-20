@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320232213) do
+ActiveRecord::Schema.define(version: 20150320234620) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150320232213) do
     t.datetime "updated_at",         null: false
   end
 
+  add_index "subdomains", ["subdomain"], name: "index_subdomains_on_subdomain", unique: true, using: :btree
   add_index "subdomains", ["user_id"], name: "index_subdomains_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|

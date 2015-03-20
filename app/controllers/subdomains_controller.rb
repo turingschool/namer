@@ -10,7 +10,8 @@ class SubdomainsController < ApplicationController
   def create
     @subdomain = current_user.subdomains.new(subdomain_params)
     if @subdomain.valid? && @subdomain.register!
-      #...
+      flash[:message] = "Congrats, you registered the subdomain #{@subdomain.subdomain}.turingapps.io to point to #{@subdomain.content}"
+      redirect_to user_subdomains_path(current_user)
     else
       render :new
     end
