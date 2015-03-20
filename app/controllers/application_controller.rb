@@ -7,4 +7,9 @@ class ApplicationController < ActionController::Base
     return nil unless session[:user_id]
     @current_user ||= User.find(session[:user_id])
   end
+  helper_method :current_user
+
+  def require_login
+    redirect_to login_path unless current_user
+  end
 end

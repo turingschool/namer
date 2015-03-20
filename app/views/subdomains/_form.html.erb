@@ -1,0 +1,9 @@
+<%= form_for [current_user, @subdomain] do |f| %>
+  <%= f.label :content %>:
+  <%= f.text_field :content %><br />
+
+  <%= f.label :subdomain %>:
+  <%= f.text_field :subdomain %><br />
+
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,9 @@
+<h2>Hi, <%= current_user.github_account %>! Here are your subdomains:</h2>
+
+<% current_user.subdomains.each do |s| %>
+  <p><%= s.subdomain %></p>
+<% end %>
+
+<div>
+  <p><%= link_to "Register a new subdomain", new_user_subdomain_path(current_user) %></p>
+</div>
