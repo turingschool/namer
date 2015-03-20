@@ -1,0 +1,8 @@
+user - github token
+     - github id
+     - github teams? -- validate this only on signup?
+
+Subdomain - dnsimple record id
+          - source url
+          - subdomain name
+          - user_id
