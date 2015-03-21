@@ -9,6 +9,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-github'
+gem 'faraday'
 
 group :development, :test do
   gem 'byebug'
