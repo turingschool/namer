@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'faraday'
+gem 'dnsimple'
 
 group :development, :test do
   gem 'byebug'

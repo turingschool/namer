@@ -1,0 +1,10 @@
+<h1>Welcome to turingapps.io!</h1>
+<h2>This site houses a collection of applications produced by students at the Turing School of Software and Design</h2>
+<h2>Browse some of the work below:</h2>
+
+
+<ul>
+<% @apps.each do |app| %>
+  <li><%= link_to app.subdomain, "http://#{app.subdomain}.turingapps.io" %></li>
+<% end %>
+</ul>
