@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    puts "Sessions#create!"
     auth = request.env["omniauth.auth"]
     if auth && turing_member?
       user_info = {github_id: auth.uid, github_token: auth.credentials.token,
