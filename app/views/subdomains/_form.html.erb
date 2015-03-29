@@ -1,9 +1,9 @@
-<%= form_for [current_user, @subdomain] do |f| %>
+<%= form_for @subdomain do |f| %>
   <%= f.label :content %>:
-  <%= f.text_field :content %><br />
+  <%= f.text_field :content %><span> (original URL or IP Address) </span><br />
 
   <%= f.label :subdomain %>:
-  <%= f.text_field :subdomain %><br />
+  <%= f.text_field :subdomain %><span>(.turingapps.io)</span><br />
 
   <%= f.submit %>
 <% end %>

@@ -3,7 +3,7 @@ class User
 
   def initialize(attributes)
     attributes = ActiveSupport::HashWithIndifferentAccess.new(attributes)
-    @github_id = attributes[:github_id]
+    @github_id = attributes[:github_id].to_i
     @github_name = attributes[:github_name]
     @email = attributes[:email]
     @github_token = attributes[:github_token]

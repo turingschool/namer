@@ -1,9 +1,9 @@
-<h2>Here are the subdomains registered for GH user <%= params[:user_id] %>:</h2>
+<h2>Here are the subdomains registered for GH user <%= current_user.github_name %> (<%= current_user.github_id %>):</h2>
 
 <% current_user.subdomains.each do |s| %>
-  <p><%= s.subdomain %></p>
+  <p><%= s.subdomain %> <span><%= link_to "delete subdomain", subdomain_path(s), method: "delete" %></span></p>
 <% end %>
 
 <div>
-  <p><%= link_to "Register a new subdomain", new_user_subdomain_path(current_user) %></p>
+  <p><%= link_to "Register a new subdomain", new_subdomain_path %></p>
 </div>

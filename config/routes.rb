@@ -7,7 +7,5 @@ Rails.application.routes.draw do
   resources :apps, only: [:index]
 
 
-  resources :users, only: [] do
-    resources :subdomains
-  end
+  resources :subdomains
 end
