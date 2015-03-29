@@ -23,6 +23,12 @@ class SessionsController < ApplicationController
     end
   end
 
+  def failure
+    Rails.logger.error("Oauth failed...#{params[:message]}")
+    flash[:notice] = params[:message]
+    redirect_to root_path
+  end
+
   def destroy
     session[:current_user] = nil
     redirect_to root_path
