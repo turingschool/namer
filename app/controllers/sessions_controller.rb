@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     if current_user
-      redirect_to user_subdomains_path(current_user)
+      redirect_to subdomains_path
     else
       redirect_to '/auth/github'
     end
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
       Rails.logger.info("user is turing member, will log them in with info: #{user_info}")
       @current_user = User.new(user_info)
       session[:current_user] = @current_user.as_json
-      redirect_to user_subdomains_path(user_id: current_user.github_id)
+      redirect_to subdomains_path(user_id: current_user.github_id)
     else
       Rails.logger.error("user is not authed or is not turing member...redirect them")
       flash[:error] = "Sorry, only members of the Turing github organization can do that."
