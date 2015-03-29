@@ -1,28 +1,9 @@
-== README
+== Namer - Shared Turing CNAMEs
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application uses the DNSimple API to allow users to register custom CNAMES under the turingapps.io domain.
 
-Things you may want to cover:
+The intent is to give Turing students a convenient place to aggregate links to portfolio applications without
+having to go through the hassle of registering and configuring their own domains.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Authentication is done via Github Oauth; to run the application you'll need these environment keys
+provisioned: `NAMER_GITHUB_ID` and `NAMER_GITHUB_SECRET`

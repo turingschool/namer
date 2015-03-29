@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'omniauth-github'
 gem 'faraday'
 gem 'dnsimple'
+gem 'octokit'
 
 group :development, :test do
   gem 'byebug'
