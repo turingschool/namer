@@ -10,11 +10,14 @@ class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
     if auth && turing_member?
-      @current_user = User.new(github_id: auth.uid, github_token: auth.credentials.token,
-                               github_name: auth.info.nickname, email: auth.info.email)
+      user_info = {github_id: auth.uid, github_token: auth.credentials.token,
+                   github_name: auth.info.nickname, email: auth.info.email}
+      Rails.logger.info("user is turing member, will log them in with info: #{user_info}")
+      @current_user = User.new(user_info)
       session[:current_user] = @current_user.as_json
       redirect_to user_subdomains_path(user_id: current_user.github_id)
     else
+      Rails.logger.error("user is not authed or is not turing member...redirect them")
       flash[:error] = "Sorry, only members of the Turing github organization can do that."
       redirect_to root_path
     end
@@ -29,16 +32,21 @@ class SessionsController < ApplicationController
 
   def octokit
     if request.env["omniauth.auth"] && request.env["omniauth.auth"].credentials.token
+      Rails.logger.error("got user creds; will make omniauth request with token #{request.env["omniauth.auth"].credentials.token}")
       Octokit::Client.new(:access_token => request.env["omniauth.auth"].credentials.token)
     else
+      Rails.logger.error("no user credentials available; making non-authed omniauth client")
       Octokit::Client.new #won't have access to user-specific stuff
     end
   end
 
   def user_gh_teams
     begin
-      octokit.user_teams.map(&:id)
+      teams = octokit.user_teams.map(&:id)
+      Rails.logger.info("found user teams for user #{teams}")
+      teams
     rescue Octokit::NotFound
+      Rails.logger.error("Octokit failed retrieving User GH Teams")
       []
     end
   end
