@@ -8,8 +8,14 @@
 </head>
 <body>
 
+<% flash.each do |name, msg| %>
+  <% if msg.is_a?(String) %>
+    <%= content_tag :div, msg, :class => "flash_#{name}" %>
+  <% end %>
+<% end %>
+
 <% if current_user %>
-  <p>hi, <%= current_user.github_account %></p>
+  <p>hi, <%= current_user.github_name %></p>
   <p><%= link_to "logout", logout_path %></p>
 <% else %>
   <p><%= link_to "login", login_path %></p>

@@ -7,29 +7,43 @@ class SessionsController < ApplicationController
     end
   end
 
-  #TODO: require user is member of turing org
   def create
     auth = request.env["omniauth.auth"]
-    if user = User.find_by(github_id: auth.uid)
-      user.update_attribute(:github_token, auth.credentials.token)
-      session[:user_id] = user.id
-      redirect_to user_subdomains_path(current_user)
+    if auth && turing_member?
+      @current_user = User.new(github_id: auth.uid, github_token: auth.credentials.token,
+                               github_name: auth.info.nickname, email: auth.info.email)
+      session[:current_user] = @current_user.as_json
+      redirect_to user_subdomains_path(user_id: current_user.github_id)
     else
-      user = User.new(email: auth.info.email,
-                         github_token: auth.credentials.token,
-                         github_account: auth.info.nickname,
-                         github_id: auth.uid)
-      if user.save
-        session[:user_id] = user.id
-        redirect_to user_subdomains_path(current_user)
-      else
-        raise "balls :("
-      end
+      flash[:error] = "Sorry, only members of the Turing github organization can do that."
+      redirect_to root_path
     end
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:current_user] = nil
     redirect_to root_path
+  end
+
+  private
+
+  def octokit
+    if request.env["omniauth.auth"] && request.env["omniauth.auth"].credentials.token
+      Octokit::Client.new(:access_token => request.env["omniauth.auth"].credentials.token)
+    else
+      Octokit::Client.new #won't have access to user-specific stuff
+    end
+  end
+
+  def user_gh_teams
+    begin
+      octokit.user_teams.map(&:id)
+    rescue Octokit::NotFound
+      []
+    end
+  end
+
+  def turing_member?
+    (user_gh_teams & TURING_GH_TEAMS).any?
   end
 end

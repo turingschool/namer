@@ -1,4 +1,4 @@
-<h2>Hi, <%= current_user.github_account %>! Here are your subdomains:</h2>
+<h2>Here are the subdomains registered for GH user <%= params[:user_id] %>:</h2>
 
 <% current_user.subdomains.each do |s| %>
   <p><%= s.subdomain %></p>

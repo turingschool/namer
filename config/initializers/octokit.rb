@@ -16,4 +16,4 @@
 # with 5k reqs/hour rate limit, it is probably feasible to check all whitelisted
 # teams
 # N reqs / user / auth request
-#WHITELISTED_TEAMS = [1109782, 1171200] #1406, 1407
+TURING_GH_TEAMS = [1109782, 1171200] #1406, 1407
