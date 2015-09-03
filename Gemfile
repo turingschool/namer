@@ -12,6 +12,7 @@ gem 'omniauth-github'
 gem 'faraday'
 gem 'dnsimple'
 gem 'octokit'
+gem "rails_12factor", group: :production
 
 group :development, :test do
   gem 'byebug'
