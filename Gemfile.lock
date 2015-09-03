@@ -1,10 +1,11 @@
-PATH
-  remote: ../turing_auth
+GIT
+  remote: git@github.com:turingschool/turing_auth.git
+  revision: baf369b88a04cf2b4a9139e2535b029e32bdca5f
   specs:
-    turing_auth (0.0.1)
-      octokit
-      omniauth
-      omniauth-github
+    turing_auth (0.0.7)
+      octokit (~> 3.0)
+      omniauth (~> 1.0)
+      omniauth-github (~> 1.0)
 
 GEM
   remote: https://rubygems.org/
